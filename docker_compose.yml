@@ -1,0 +1,29 @@
+services:
+  mariadb:
+    container_name: mariadb1542
+    build: ./
+    env_file:
+      - .env
+    secrets:
+      - db_pwd
+    networks:
+      - inception
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+secrets:
+  db_pwd:
+    file: db_pwd
+
+networks:
+  inception:
+    name: inception
+
+volumes:
+  mariadb_data:
+    name: mariadb_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /Users/sael-kha/goinfre/data/mariadb/
